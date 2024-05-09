@@ -6,7 +6,7 @@ import ElevateOnScroll from "./parts/ElevationScroll";
 const Header = () => {
   return (
     <ElevateOnScroll>
-      <AppBar>
+      <AppBar position="fixed" color="primary">
         <Toolbar>Arch Development</Toolbar>
       </AppBar>
     </ElevateOnScroll>
