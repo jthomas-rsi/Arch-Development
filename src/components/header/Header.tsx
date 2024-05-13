@@ -24,9 +24,10 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "auto",
   },
   tab: {
+    // ...theme.typography.tab, // will use once custom tab typography is implemented
     fontFamily: "Raleway",
-    textTransform: "none",
     fontWeight: 700,
+    textTransform: "none",
     fontSize: "1rem", // utilize rem for responsive text sizing in responsive design
     minWidth: 10,
     marginLeft: "25px", // use pixels for fixed spacing

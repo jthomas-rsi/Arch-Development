@@ -1,5 +1,5 @@
-import { createTheme } from '@material-ui/core/styles';
-import { TypographyOptions } from '@material-ui/core/styles/createTypography';
+import { CSSProperties } from 'react';
+import {createTheme } from '@material-ui/core/styles';
 
 //custom color codes
 const archBlue = "#0B72B9";
@@ -12,6 +12,19 @@ declare module '@material-ui/core/styles/createPalette' {
       orange?: string;
     }
   }
+
+  //TODO figure out how to add custom typography values to the theme
+//   declare module '@material-ui/core/styles/createTypography' {
+//     interface Typography {
+//         tab:{
+//             fontFamily: string,
+//             textTransform: string,
+//             fontWeight: number,
+//             fontSize: string
+//         }
+//     }
+    
+//   }
 
 
 const customTheme = createTheme({
@@ -27,10 +40,8 @@ const customTheme = createTheme({
             main:`${archOrange}`
         }
     },
-    typography:{
-        h3:{
-        fontWeight:300
-        }
+    typography: {
+
     },
 });
 
