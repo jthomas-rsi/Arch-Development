@@ -1,9 +1,18 @@
-import { AppBar, Box, Tab, Tabs, Toolbar, Typography } from "@material-ui/core";
+import {
+  AppBar,
+  Box,
+  Button,
+  Tab,
+  Tabs,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import ElevateOnScroll from "./parts/ElevationScroll";
 import { default as CompanyLogo } from "../../assets/logo.svg";
 import PageTabs from "./parts/PageTabs";
+import { ChangeEvent, useState } from "react";
 
 const a11yProps = (index: any) => {
   return {
@@ -32,10 +41,26 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 10,
     marginLeft: "25px", // use pixels for fixed spacing
   },
+  button: {
+    borderRadius: "50px",
+    marginLeft: "50px",
+    marginRight: "25px",
+    fontFamily: "Pacifico",
+    fontSize: "1rem",
+    textTransform: "none",
+    height: "45px",
+    color: theme.palette.common.white,
+  },
 }));
 
 const Header = () => {
   const styles = useStyles();
+
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event: ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
 
   return (
     <>
@@ -44,8 +69,10 @@ const Header = () => {
           <Toolbar disableGutters>
             <img src={CompanyLogo} className={styles.logo} alt="company logo" />
             <Tabs
-              value={0}
-              indicatorColor="primary"
+              value={value}
+              onChange={handleChange}
+              aria-label="page tabs"
+              indicatorColor="primary" // set to primary and blends into header background color
               className={styles.tabContainer}
             >
               <Tab label="Home" className={styles.tab} {...a11yProps(0)} />
@@ -61,6 +88,13 @@ const Header = () => {
                 className={styles.tab}
                 {...a11yProps(4)}
               />
+              <Button
+                className={styles.button}
+                variant="contained"
+                color="secondary"
+              >
+                Free Estimate
+              </Button>
             </Tabs>
           </Toolbar>
         </AppBar>
