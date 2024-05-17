@@ -16,6 +16,7 @@ import ElevateOnScroll from "./parts/ElevationScroll";
 import { default as CompanyLogo } from "../../assets/logo.svg";
 // import PageTabs from "./parts/PageTabs";
 import { ChangeEvent, useEffect, useState } from "react";
+import updateSelectedHeaderItems from "./utilis/updateSelectedHeaderItems";
 
 const a11yProps = (index: any) => {
   return {
@@ -127,60 +128,8 @@ const Header = () => {
   ];
 
   useEffect(() => {
-    // switch statement to set correct current page and menuItem after refresh
-    switch (window.location.pathname) {
-      case "/":
-        if (value !== 0) {
-          setValue(0);
-        }
-        break;
-      case "/services":
-        if (value !== 1) {
-          setValue(1);
-          setMenuItemIndex(0);
-        }
-        break;
-      case "/customsoftware":
-        if (value !== 1) {
-          setValue(1);
-          setMenuItemIndex(1);
-        }
-        break;
-      case "/mobileapps":
-        if (value !== 1) {
-          setValue(1);
-          setMenuItemIndex(2);
-        }
-        break;
-      case "/websites":
-        if (value !== 1) {
-          setValue(1);
-          setMenuItemIndex(3);
-        }
-        break;
-      case "/revolution":
-        if (value !== 2) {
-          setValue(2);
-        }
-        break;
-      case "/about":
-        if (value !== 3) {
-          setValue(3);
-        }
-        break;
-      case "/contact":
-        if (value !== 4) {
-          setValue(4);
-        }
-        break;
-      case "/estimate":
-        if (value !== 5) {
-          setValue(5);
-        }
-        break;
-      default:
-        break;
-    }
+    const pathName = window.location.pathname;
+    updateSelectedHeaderItems(pathName, value, setValue, setMenuItemIndex);
   }, [value]);
 
   return (
