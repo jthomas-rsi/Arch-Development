@@ -1,4 +1,14 @@
-import { AppBar, Box, Button, Tab, Tabs, Toolbar } from "@material-ui/core";
+import {
+  AppBar,
+  Box,
+  Button,
+  Menu,
+  MenuItem,
+  Tab,
+  Tabs,
+  Toolbar,
+} from "@material-ui/core";
+import { MouseEvent } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
@@ -55,10 +65,25 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
   const styles = useStyles();
 
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(0); // sets the active tab value
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // sets the anchor element for the menu
+  const [open, setOpen] = useState(false);
 
+  // changes the active tab value based on the current page
   const handleChange = (event: ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+  };
+
+  // opens the menu when the button is clicked
+  const handleOpen = (event: MouseEvent<HTMLAnchorElement>) => {
+    setAnchorEl(event.currentTarget);
+    setOpen(true);
+  };
+
+  // closes the menu when an item is clicked
+  const handleClose = () => {
+    setAnchorEl(null);
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -111,6 +136,12 @@ const Header = () => {
                 {...a11yProps(0)}
               />
               <Tab
+                aria-owns={anchorEl ? "services-menu" : undefined}
+                aria-haspopup={anchorEl ? "true" : undefined}
+                onMouseOver={(e) => {
+                  // opens menu when mouse hovers over tab
+                  handleOpen(e);
+                }}
                 label="Services"
                 component={Link}
                 to="/services"
@@ -147,6 +178,37 @@ const Header = () => {
               >
                 Free Estimate
               </Button>
+              <Menu
+                id="services-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{ onMouseLeave: handleClose }} // closes menu when mouse leaves menu
+                elevation={0}
+                style={{ zIndex: 1302 }}
+              >
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                  }}
+                >
+                  Custom Software Development
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                  }}
+                >
+                  Mobile App Development
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                  }}
+                >
+                  Website Development
+                </MenuItem>
+              </Menu>
             </Tabs>
           </Toolbar>
         </AppBar>
