@@ -60,6 +60,22 @@ const useStyles = makeStyles((theme) => ({
     height: "45px",
     color: theme.palette.common.white,
   },
+  menu: {
+    backgroundColor: theme.palette.common.blue,
+    color: theme.palette.common.white,
+    borderRadius: "0px",
+  },
+  menuItem: {
+    // when tab settings added to customTheme object, add here
+    fontFamily: "Raleway",
+    fontWeight: 700,
+    textTransform: "none",
+    fontSize: "1rem", // utilize rem for responsive text sizing in responsive design
+    opacity: 0.7,
+    "&:hover": {
+      opacity: 1,
+    },
+  },
 }));
 
 const Header = () => {
@@ -186,14 +202,16 @@ const Header = () => {
                 MenuListProps={{ onMouseLeave: handleClose }} // closes menu when mouse leaves menu
                 elevation={0}
                 style={{ zIndex: 1302 }}
+                classes={{ paper: styles.menu }} // using "paper" CSS rule name customizes paper of the menu component when rendered
               >
                 <MenuItem
                   onClick={() => {
                     handleClose();
                     setValue(1);
                   }}
-                  component={Link as any} // as any is used to prevent type error that won't be fixed until MUI v5
                   to="/services"
+                  component={Link as any} // as any is used to prevent type error that won't be fixed until MUI v5
+                  classes={{ root: styles.menuItem }}
                 >
                   Services
                 </MenuItem>
@@ -202,8 +220,9 @@ const Header = () => {
                     handleClose();
                     setValue(1);
                   }}
-                  component={Link as any} // as any is used to prevent type error that won't be fixed until MUI v5
                   to="/customsoftware"
+                  component={Link as any} // as any is used to prevent type error that won't be fixed until MUI v5
+                  classes={{ root: styles.menuItem }}
                 >
                   Custom Software Development
                 </MenuItem>
@@ -212,8 +231,9 @@ const Header = () => {
                     handleClose();
                     setValue(1);
                   }}
-                  component={Link as any} // as any is used to prevent type error that won't be fixed until MUI v5
                   to="/mobileapps"
+                  component={Link as any} // as any is used to prevent type error that won't be fixed until MUI v5
+                  classes={{ root: styles.menuItem }}
                 >
                   Mobile App Development
                 </MenuItem>
@@ -222,8 +242,9 @@ const Header = () => {
                     handleClose();
                     setValue(1);
                   }}
-                  component={Link as any} // as any is used to prevent type error that won't be fixed until MUI v5
                   to="/websites"
+                  component={Link as any} // as any is used to prevent type error that won't be fixed until MUI v5
+                  classes={{ root: styles.menuItem }}
                 >
                   Website Development
                 </MenuItem>
