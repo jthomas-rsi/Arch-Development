@@ -8,7 +8,7 @@ import {
   Tabs,
   Toolbar,
 } from "@material-ui/core";
-import { MouseEvent } from "react";
+import { LinkHTMLAttributes, MouseEvent } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
@@ -190,21 +190,40 @@ const Header = () => {
                 <MenuItem
                   onClick={() => {
                     handleClose();
+                    setValue(1);
                   }}
+                  component={Link as any} // as any is used to prevent type error that won't be fixed until MUI v5
+                  to="/services"
+                >
+                  Services
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    setValue(1);
+                  }}
+                  component={Link as any} // as any is used to prevent type error that won't be fixed until MUI v5
+                  to="/customsoftware"
                 >
                   Custom Software Development
                 </MenuItem>
                 <MenuItem
                   onClick={() => {
                     handleClose();
+                    setValue(1);
                   }}
+                  component={Link as any} // as any is used to prevent type error that won't be fixed until MUI v5
+                  to="/mobileapps"
                 >
                   Mobile App Development
                 </MenuItem>
                 <MenuItem
                   onClick={() => {
                     handleClose();
+                    setValue(1);
                   }}
+                  component={Link as any} // as any is used to prevent type error that won't be fixed until MUI v5
+                  to="/websites"
                 >
                   Website Development
                 </MenuItem>
