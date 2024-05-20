@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface PageTabsProps {
   anchorEl: HTMLElement;
-  open: boolean;
+  openServicesMenu: boolean;
   value: number;
   setValue: Dispatch<SetStateAction<number>>;
   handleChange: (event: ChangeEvent<{}>, newValue: number) => void;
@@ -80,7 +80,7 @@ interface PageTabsProps {
 const PageTabs = ({
   anchorEl,
   menuItemIndex,
-  open,
+  openServicesMenu,
   value,
   setValue,
   handleChange,
@@ -158,7 +158,7 @@ const PageTabs = ({
       <Menu
         id="services-menu"
         anchorEl={anchorEl}
-        open={open}
+        open={openServicesMenu}
         onClose={handleClose}
         MenuListProps={{ onMouseLeave: handleClose }} // closes menu when mouse leaves menu
         elevation={0}

@@ -3,13 +3,14 @@ import {
   AppBar,
   Box,
   Button,
-  Menu,
-  MenuItem,
-  Tab,
-  Tabs,
   Toolbar,
   useMediaQuery,
+  SwipeableDrawer,
+  Drawer,
+  IconButton,
 } from "@material-ui/core";
+import { Menu } from "@material-ui/icons";
+import { isIOS } from "react-device-detect";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
@@ -18,21 +19,27 @@ import { default as CompanyLogo } from "../../assets/logo.svg";
 import { ChangeEvent, useEffect, useState } from "react";
 import updateSelectedHeaderItems from "./utilis/updateSelectedHeaderItems";
 import PageTabs from "./parts/PageTabs";
-
-const a11yProps = (index: any) => {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-};
+import PagesMenu from "./parts/PageMenu";
 
 const useStyles = makeStyles((theme) => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
     marginBottom: "3em",
+    [theme.breakpoints.down("md")]: {
+      marginBottom: "2em",
+    },
+    [theme.breakpoints.down("xs")]: {
+      marginBottom: "1.25em",
+    },
   },
   logo: {
     height: "8em",
+    [theme.breakpoints.down("md")]: {
+      height: "7em",
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: "5.5em",
+    },
   },
   logoContainer: {
     padding: "0",
@@ -78,16 +85,27 @@ const useStyles = makeStyles((theme) => ({
       opacity: 1,
     },
   },
+  menuIcon: {
+    width: "50px",
+    height: "50px",
+  },
+  menuIconContainer: {
+    marginLeft: "auto",
+    "&:hover": {
+      backgroundColor: "transparent", // removes hove effect when clicking menu icon button in header
+    },
+  },
 }));
 
 const Header = () => {
   const styles = useStyles();
   const { breakpoints } = useTheme();
-  const isMediumScreen = useMediaQuery(breakpoints.down("md"));
+  const isSmallScreen = useMediaQuery(breakpoints.down("md"));
 
+  const [openDrawer, setOpenDrawer] = useState(false); // sets the open state of the drawer
   const [value, setValue] = useState(0); // sets the active tab value
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // sets the anchor element for the menu
-  const [open, setOpen] = useState(false);
+  const [openServicesMenu, setOpenServicesMenu] = useState(false);
   const [menuItemIndex, setMenuItemIndex] = useState(0);
 
   // changes the active tab value based on the current page
@@ -98,18 +116,18 @@ const Header = () => {
   // opens the menu when the button is clicked
   const handleOpen = (event: MouseEvent<HTMLAnchorElement>) => {
     setAnchorEl(event.currentTarget);
-    setOpen(true);
+    setOpenServicesMenu(true);
   };
 
   // closes the menu when an item is clicked
   const handleClose = () => {
     setAnchorEl(null);
-    setOpen(false);
+    setOpenServicesMenu(false);
   };
 
   const handleMenuItemClick = (i: number) => {
     setAnchorEl(null);
-    setOpen(false);
+    setOpenServicesMenu(false);
     setMenuItemIndex(i);
   };
 
@@ -136,18 +154,26 @@ const Header = () => {
                 alt="company logo"
               />
             </Button>
-            {!isMediumScreen && (
+            {!isSmallScreen && (
               <PageTabs
                 {...{
                   anchorEl: anchorEl!,
                   menuItemIndex,
-                  open,
+                  openServicesMenu,
                   value,
                   setValue,
                   handleChange,
                   handleClose,
                   handleOpen,
                   handleMenuItemClick,
+                }}
+              />
+            )}
+            {isSmallScreen && (
+              <PagesMenu
+                {...{
+                  openDrawer,
+                  setOpenDrawer,
                 }}
               />
             )}
