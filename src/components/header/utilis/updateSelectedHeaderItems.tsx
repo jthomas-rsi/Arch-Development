@@ -1,62 +1,52 @@
+import { tab } from "@testing-library/user-event/dist/tab";
+import path from "path";
+
 const updateSelectedHeaderItems = (
   pathname: string,
   value: number,
   setValue: React.Dispatch<React.SetStateAction<number>>,
   setMenuItemIndex: React.Dispatch<React.SetStateAction<number>>,
 ) => {
-  switch (window.location.pathname) {
-    case "/":
-      if (value !== 0) {
-        setValue(0);
-      }
-      break;
-    case "/services":
-      if (value !== 1) {
-        setValue(1);
-        setMenuItemIndex(0);
-      }
-      break;
-    case "/customsoftware":
-      if (value !== 1) {
-        setValue(1);
-        setMenuItemIndex(1);
-      }
-      break;
-    case "/mobileapps":
-      if (value !== 1) {
-        setValue(1);
-        setMenuItemIndex(2);
-      }
-      break;
-    case "/websites":
-      if (value !== 1) {
-        setValue(1);
-        setMenuItemIndex(3);
-      }
-      break;
-    case "/revolution":
-      if (value !== 2) {
-        setValue(2);
-      }
-      break;
-    case "/about":
-      if (value !== 3) {
-        setValue(3);
-      }
-      break;
-    case "/contact":
-      if (value !== 4) {
-        setValue(4);
-      }
-      break;
-    case "/estimate":
-      if (value !== 5) {
-        setValue(5);
-      }
-      break;
-    default:
-      break;
-  }
+  const options = [
+    { name: "Home", link: "/", tabIndex: 0 },
+    { name: "Services", link: "/services", tabIndex: 1 },
+    {
+      name: "Custom Software Development",
+      link: "/customsoftware",
+      tabIndex: 1,
+      itemIndex: 1,
+    },
+    {
+      name: "Mobile App Development",
+      link: "/mobileapps",
+      tabIndex: 1,
+      itemIndex: 2,
+    },
+    {
+      name: "Website Development",
+      link: "/websites",
+      tabIndex: 1,
+      itemIndex: 3,
+    },
+    { name: "The Revolution", link: "/revolution", tabIndex: 2 },
+    { name: "About Us", link: "/about", tabIndex: 3 },
+    { name: "Contact Us", link: "/contact", tabIndex: 4 },
+  ];
+
+  options.forEach((option) => {
+    switch (pathname) {
+      case option.link:
+        if (value !== option.tabIndex) {
+          setValue(option.tabIndex);
+        }
+        if (option.itemIndex !== undefined && setMenuItemIndex !== undefined) {
+          setMenuItemIndex(option.itemIndex);
+        }
+        break;
+      default:
+        break;
+    }
+  });
 };
 
 export default updateSelectedHeaderItems;

@@ -5,16 +5,16 @@ import { Link } from "react-router-dom";
 import {
   List,
   ListItem,
-  ListItemProps,
   ListItemText,
-  ListItemIcon,
   IconButton,
+  Theme,
   SwipeableDrawer,
+  Box,
 } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   menuIcon: {
     width: "50px",
     height: "50px",
@@ -45,6 +45,19 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.orange,
     "&:hover": {
       opacity: 1, // removes hove effect when clicking menu icon button in header
+    },
+  },
+  menuItemSelected: {
+    opacity: 1,
+  },
+  toolbarMargin: {
+    ...theme.mixins.toolbar,
+    marginBottom: "3em",
+    [theme.breakpoints.down("md")]: {
+      marginBottom: "2em",
+    },
+    [theme.breakpoints.down("xs")]: {
+      marginBottom: "1.25em",
     },
   },
 }));
@@ -98,6 +111,9 @@ const PagesMenu = ({
         classes={{ paper: styles.menu }}
       >
         <List disablePadding>
+          <Box // box acts as custom margin to prevent content from being hidden behind the app bar
+            className={styles.toolbarMargin}
+          />
           {
             // map through the menuItemOptions array to create a ListItem for each item
             menuItemOptions.map((item, i) => (
@@ -111,12 +127,16 @@ const PagesMenu = ({
                 key={i}
                 className={
                   item.name === "Free Estimate" ? styles.menuItemEstimate : ""
-                }
+                } // adds a different style to the Free Estimate menu item
               >
                 <ListItemText
                   disableTypography
                   primary={item.name}
-                  className={styles.menuItem}
+                  className={
+                    value === i
+                      ? `${styles.menuItem} ${styles.menuItemSelected}`
+                      : styles.menuItem
+                  } // adds a different style to the selected menu item
                 />
               </ListItem>
             ))

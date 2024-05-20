@@ -84,6 +84,9 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "transparent", // removes hove effect when clicking menu icon button in header
     },
   },
+  appBar: {
+    zIndex: theme.zIndex.modal + 1,
+  },
 }));
 
 const Header = () => {
@@ -128,7 +131,7 @@ const Header = () => {
   return (
     <>
       <ElevateOnScroll>
-        <AppBar position="fixed" color="primary">
+        <AppBar position="fixed" color="primary" className={styles.appBar}>
           <Toolbar disableGutters>
             <Button
               className={styles.logoContainer}
@@ -159,14 +162,16 @@ const Header = () => {
               />
             )}
             {isSmallScreen && (
-              <PagesMenu
-                {...{
-                  openDrawer,
-                  value,
-                  setValue,
-                  setOpenDrawer,
-                }}
-              />
+              <>
+                <PagesMenu
+                  {...{
+                    openDrawer,
+                    value,
+                    setValue,
+                    setOpenDrawer,
+                  }}
+                />
+              </>
             )}
           </Toolbar>
         </AppBar>
