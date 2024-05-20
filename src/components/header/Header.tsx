@@ -1,16 +1,5 @@
 import { MouseEvent } from "react";
-import {
-  AppBar,
-  Box,
-  Button,
-  Toolbar,
-  useMediaQuery,
-  SwipeableDrawer,
-  Drawer,
-  IconButton,
-} from "@material-ui/core";
-import { Menu } from "@material-ui/icons";
-import { isIOS } from "react-device-detect";
+import { AppBar, Box, Button, Toolbar, useMediaQuery } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 

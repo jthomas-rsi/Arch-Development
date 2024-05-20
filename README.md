@@ -9,6 +9,7 @@ What are you goals for this project?
 ### Remain Tasks
 
 - Update Typography && Tab types so custom styling can be added to customTheme object
+- Centralize all component styles into one main file and export to where used in application
 
 ### Technical Explanations
 

@@ -1,6 +1,5 @@
 import {
   Button,
-  // Link,
   Menu,
   MenuItem,
   Tab,
@@ -10,8 +9,6 @@ import {
 } from "@material-ui/core";
 import { ChangeEvent, Dispatch, MouseEvent, SetStateAction } from "react";
 import { Link } from "react-router-dom";
-
-//TODO Fix this component
 
 const a11yProps = (index: any) => {
   return {
