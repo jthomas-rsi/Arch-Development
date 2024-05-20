@@ -51,11 +51,32 @@ const useStyles = makeStyles((theme) => ({
 
 interface PagesMenuProps {
   openDrawer: boolean;
+  value: number;
+  setValue: Dispatch<SetStateAction<number>>;
   setOpenDrawer: Dispatch<SetStateAction<boolean>>;
 }
 
-const PagesMenu = ({ openDrawer, setOpenDrawer }: PagesMenuProps) => {
+const PagesMenu = ({
+  openDrawer,
+  value,
+  setValue,
+  setOpenDrawer,
+}: PagesMenuProps) => {
   const styles = useStyles();
+
+  const handleMenuItemClick = (i: number) => {
+    setValue(i);
+    setOpenDrawer(false);
+  };
+
+  const menuItemOptions = [
+    { name: "Home", link: "/" },
+    { name: "Services", link: "/services" },
+    { name: "The Revolution", link: "/revolution" },
+    { name: "About Us", link: "/about" },
+    { name: "Contact Us", link: "/contact" },
+    { name: "Free Estimate", link: "/estimate" },
+  ];
 
   return (
     <>
@@ -77,85 +98,29 @@ const PagesMenu = ({ openDrawer, setOpenDrawer }: PagesMenuProps) => {
         classes={{ paper: styles.menu }}
       >
         <List disablePadding>
-          <ListItem
-            divider
-            button
-            component={Link}
-            to={"/"}
-            onClick={() => setOpenDrawer(false)}
-          >
-            <ListItemText
-              disableTypography
-              primary="Home"
-              className={styles.menuItem}
-            />
-          </ListItem>
-          <ListItem
-            divider
-            button
-            component={Link}
-            to={"/services"}
-            onClick={() => setOpenDrawer(false)}
-          >
-            <ListItemText
-              disableTypography
-              primary="Services"
-              className={styles.menuItem}
-            />
-          </ListItem>
-          <ListItem
-            divider
-            button
-            component={Link}
-            to={"/revolution"}
-            onClick={() => setOpenDrawer(false)}
-          >
-            <ListItemText
-              disableTypography
-              primary="The Revolution"
-              className={styles.menuItem}
-            />
-          </ListItem>
-          <ListItem
-            divider
-            button
-            component={Link}
-            to={"/about"}
-            onClick={() => setOpenDrawer(false)}
-          >
-            <ListItemText
-              disableTypography
-              primary="About Us"
-              className={styles.menuItem}
-            />
-          </ListItem>
-          <ListItem
-            divider
-            button
-            component={Link}
-            to={"/contact"}
-            onClick={() => setOpenDrawer(false)}
-          >
-            <ListItemText
-              disableTypography
-              primary="Contact Us"
-              className={styles.menuItem}
-            />
-          </ListItem>
-          <ListItem
-            divider
-            button
-            component={Link}
-            to={"/estimate"}
-            onClick={() => setOpenDrawer(false)}
-            className={styles.menuItemEstimate}
-          >
-            <ListItemText
-              disableTypography
-              primary="Free Estimate"
-              className={styles.menuItem}
-            />
-          </ListItem>
+          {
+            // map through the menuItemOptions array to create a ListItem for each item
+            menuItemOptions.map((item, i) => (
+              <ListItem
+                divider
+                button
+                component={Link}
+                to={item.link}
+                onClick={() => handleMenuItemClick(i)}
+                selected={value === i}
+                key={i}
+                className={
+                  item.name === "Free Estimate" ? styles.menuItemEstimate : ""
+                }
+              >
+                <ListItemText
+                  disableTypography
+                  primary={item.name}
+                  className={styles.menuItem}
+                />
+              </ListItem>
+            ))
+          }
         </List>
       </SwipeableDrawer>
     </>
