@@ -1,18 +1,17 @@
 import {
-  Box,
+  Button,
+  // Link,
+  Menu,
+  MenuItem,
   Tab,
   Tabs,
   Theme,
-  Typography,
   makeStyles,
 } from "@material-ui/core";
-import { useState } from "react";
+import { ChangeEvent, Dispatch, MouseEvent, SetStateAction } from "react";
+import { Link } from "react-router-dom";
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: any;
-  value: any;
-}
+//TODO Fix this component
 
 const a11yProps = (index: any) => {
   return {
@@ -21,62 +20,169 @@ const a11yProps = (index: any) => {
   };
 };
 
-const TabPanel = (props: TabPanelProps) => {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-};
-
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
+  tabContainer: {
+    marginLeft: "auto",
+  },
+  tab: {
+    // ...theme.typography.tab, // will use once custom tab typography is implemented
+    fontFamily: "Raleway",
+    fontWeight: 700,
+    textTransform: "none",
+    fontSize: "1rem", // utilize rem for responsive text sizing in responsive design
+    minWidth: 10,
+    marginLeft: "25px", // use pixels for fixed spacing
+  },
+  button: {
+    borderRadius: "50px",
+    marginLeft: "50px",
+    marginRight: "25px",
+    fontFamily: "Pacifico",
+    fontSize: "1rem",
+    textTransform: "none",
+    height: "45px",
+    color: theme.palette.common.white,
+  },
+  menu: {
+    backgroundColor: theme.palette.common.blue,
+    color: theme.palette.common.white,
+    borderRadius: "0px",
+  },
+  menuItem: {
+    // when tab settings added to customTheme object, add here
+    fontFamily: "Raleway",
+    fontWeight: 700,
+    textTransform: "none",
+    fontSize: "1rem", // utilize rem for responsive text sizing in responsive design
+    opacity: 0.7,
+    "&:hover": {
+      opacity: 1,
+    },
+  },
 }));
 
-const PageTabs = () => {
+interface PageTabsProps {
+  anchorEl: HTMLElement;
+  open: boolean;
+  value: number;
+  setValue: Dispatch<SetStateAction<number>>;
+  handleChange: (event: ChangeEvent<{}>, newValue: number) => void;
+  handleOpen: (event: MouseEvent<HTMLAnchorElement>) => void;
+  handleClose: () => void;
+  handleMenuItemClick: (i: number) => void;
+  menuItemIndex: number;
+}
+
+const PageTabs = ({
+  anchorEl,
+  menuItemIndex,
+  open,
+  value,
+  setValue,
+  handleChange,
+  handleClose,
+  handleOpen,
+  handleMenuItemClick,
+}: PageTabsProps) => {
   const styles = useStyles();
-  const [value, setValue] = useState(0);
+
+  // list of services menu options
+  const servicesMenuOptions = [
+    { name: "Services", link: "/services" },
+    { name: "Custom Software Development", link: "/customsoftware" },
+    { name: "Mobile App Development", link: "/mobileapps" },
+    { name: "Website Development", link: "/websites" },
+  ];
+
+  // list of Tab options for the header
+  const tabOptions = [
+    { name: "Home", link: "/" },
+    { name: "Services", link: "/services" },
+    { name: "The Revolution", link: "/revolution" },
+    { name: "About Us", link: "/about" },
+    { name: "Contact Us", link: "/contact" },
+  ];
 
   return (
-    <Box>
-      <Tabs value={0} indicatorColor="primary">
-        <Tab label="Home" {...a11yProps(0)} />
-        <Tab label="Services" {...a11yProps(1)} />
-        <Tab label="The Revolution" {...a11yProps(2)} />
-        <Tab label="About Us" {...a11yProps(3)} />
-        <Tab label="Contact Us" {...a11yProps(4)} />
-      </Tabs>
-      {/* <TabPanel value={value} index={0}>
-        Home
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Services
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        The Revolution
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        About Us
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        Contact Us
-      </TabPanel> */}
-    </Box>
+    <Tabs
+      value={value}
+      onChange={handleChange}
+      aria-label="page tabs"
+      indicatorColor="primary" // set to primary and blends into header background color
+      className={styles.tabContainer}
+    >
+      {
+        // map tab options to tab components
+        tabOptions.map((option, index) =>
+          // if the option is "Services", render a tab with a menu
+          option.name === "Services" ? (
+            <Tab
+              key={index}
+              aria-owns={anchorEl ? "services-menu" : undefined}
+              aria-haspopup={anchorEl ? "true" : undefined}
+              onMouseOver={(e) => {
+                // opens menu when mouse hovers over tab
+                handleOpen(e as unknown as MouseEvent<HTMLAnchorElement>);
+              }}
+              label={option.name}
+              component={Link}
+              to={option.link}
+              className={styles.tab}
+              {...a11yProps(index + 1)}
+            />
+          ) : (
+            <Tab
+              key={index}
+              label={option.name}
+              component={Link}
+              to={option.link}
+              className={styles.tab}
+              {...a11yProps(index)}
+            />
+          ),
+        )
+      }
+      <Button
+        className={styles.button}
+        component={Link}
+        to="/estimate"
+        variant="contained"
+        color="secondary"
+      >
+        Free Estimate
+      </Button>
+      <Menu
+        id="services-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{ onMouseLeave: handleClose }} // closes menu when mouse leaves menu
+        elevation={0}
+        style={{ zIndex: 1302 }}
+        classes={{ paper: styles.menu }} // using "paper" CSS rule name customizes paper of the menu component when rendered
+      >
+        {servicesMenuOptions.map((option, index) => (
+          <MenuItem
+            key={`${option}${index}`}
+            onClick={() => {
+              handleClose();
+              setValue(1);
+              handleMenuItemClick(index);
+            }}
+            selected={index === menuItemIndex && value === 1}
+            to={option.link}
+            component={Link}
+            classes={{ root: styles.menuItem }}
+          >
+            {option.name}
+          </MenuItem>
+        ))}
+      </Menu>
+    </Tabs>
   );
 };
 

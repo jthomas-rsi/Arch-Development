@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import {
   AppBar,
   Box,
@@ -7,16 +8,16 @@ import {
   Tab,
   Tabs,
   Toolbar,
+  useMediaQuery,
 } from "@material-ui/core";
-import { LinkHTMLAttributes, MouseEvent } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
 import ElevateOnScroll from "./parts/ElevationScroll";
 import { default as CompanyLogo } from "../../assets/logo.svg";
-// import PageTabs from "./parts/PageTabs";
 import { ChangeEvent, useEffect, useState } from "react";
 import updateSelectedHeaderItems from "./utilis/updateSelectedHeaderItems";
+import PageTabs from "./parts/PageTabs";
 
 const a11yProps = (index: any) => {
   return {
@@ -81,6 +82,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const styles = useStyles();
+  const { breakpoints } = useTheme();
+  const isMediumScreen = useMediaQuery(breakpoints.down("md"));
 
   const [value, setValue] = useState(0); // sets the active tab value
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // sets the anchor element for the menu
@@ -110,23 +113,6 @@ const Header = () => {
     setMenuItemIndex(i);
   };
 
-  // list of services menu options
-  const servicesMenuOptions = [
-    { name: "Services", link: "/services" },
-    { name: "Custom Software Development", link: "/customsoftware" },
-    { name: "Mobile App Development", link: "/mobileapps" },
-    { name: "Website Development", link: "/websites" },
-  ];
-
-  // list of Tab options for the header
-  const tabOptions = [
-    { name: "Home", link: "/" },
-    { name: "Services", link: "/services" },
-    { name: "The Revolution", link: "/revolution" },
-    { name: "About Us", link: "/about" },
-    { name: "Contact Us", link: "/contact" },
-  ];
-
   useEffect(() => {
     const pathName = window.location.pathname;
     updateSelectedHeaderItems(pathName, value, setValue, setMenuItemIndex);
@@ -150,81 +136,21 @@ const Header = () => {
                 alt="company logo"
               />
             </Button>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              aria-label="page tabs"
-              indicatorColor="primary" // set to primary and blends into header background color
-              className={styles.tabContainer}
-            >
-              {
-                // map tab options to tab components
-                tabOptions.map((option, index) =>
-                  // if the option is "Services", render a tab with a menu
-                  option.name === "Services" ? (
-                    <Tab
-                      key={index}
-                      aria-owns={anchorEl ? "services-menu" : undefined}
-                      aria-haspopup={anchorEl ? "true" : undefined}
-                      onMouseOver={(e) => {
-                        // opens menu when mouse hovers over tab
-                        handleOpen(e);
-                      }}
-                      label={option.name}
-                      component={Link}
-                      to={option.link}
-                      className={styles.tab}
-                      {...a11yProps(index + 1)}
-                    />
-                  ) : (
-                    <Tab
-                      key={index}
-                      label={option.name}
-                      component={Link}
-                      to={option.link}
-                      className={styles.tab}
-                      {...a11yProps(index)}
-                    />
-                  ),
-                )
-              }
-              <Button
-                className={styles.button}
-                component={Link}
-                to="/estimate"
-                variant="contained"
-                color="secondary"
-              >
-                Free Estimate
-              </Button>
-              <Menu
-                id="services-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{ onMouseLeave: handleClose }} // closes menu when mouse leaves menu
-                elevation={0}
-                style={{ zIndex: 1302 }}
-                classes={{ paper: styles.menu }} // using "paper" CSS rule name customizes paper of the menu component when rendered
-              >
-                {servicesMenuOptions.map((option, index) => (
-                  <MenuItem
-                    key={`${option}${index}`}
-                    onClick={() => {
-                      handleClose();
-                      setValue(1);
-                      handleMenuItemClick(index);
-                    }}
-                    selected={index === menuItemIndex && value === 1}
-                    to={option.link}
-                    component={Link}
-                    classes={{ root: styles.menuItem }}
-                  >
-                    {option.name}
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Tabs>
+            {!isMediumScreen && (
+              <PageTabs
+                {...{
+                  anchorEl: anchorEl!,
+                  menuItemIndex,
+                  open,
+                  value,
+                  setValue,
+                  handleChange,
+                  handleClose,
+                  handleOpen,
+                  handleMenuItemClick,
+                }}
+              />
+            )}
           </Toolbar>
         </AppBar>
       </ElevateOnScroll>
