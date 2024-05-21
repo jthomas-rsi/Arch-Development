@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
 import customTheme from "./theme/customTheme";
 import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
 
 function App() {
   return (
@@ -11,17 +12,45 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<div>Home</div>} />
-          <Route path="/services" element={<div>Services</div>} />
-          <Route path="/customsoftware" element={<div>Custom Software</div>} />
-          <Route path="/mobileapps" element={<div>Mobile Apps</div>} />
-          <Route path="/websites" element={<div>Web Sites</div>} />
-          <Route path="/revolution" element={<div>Revolution</div>} />
-          <Route path="/about" element={<div>About Us</div>} />
-          <Route path="/contact" element={<div>Contact Us</div>} />
-          <Route path="/estimate" element={<div>Estimate</div>} />
+          <Route
+            path="/"
+            element={<div style={{ height: "100vh" }}>Home</div>}
+          />
+          <Route
+            path="/services"
+            element={<div style={{ height: "100vh" }}>Services</div>}
+          />
+          <Route
+            path="/customsoftware"
+            element={<div style={{ height: "100vh" }}>Custom Software</div>}
+          />
+          <Route
+            path="/mobileapps"
+            element={<div style={{ height: "100vh" }}>Mobile Apps</div>}
+          />
+          <Route
+            path="/websites"
+            element={<div style={{ height: "100vh" }}>Web Sites</div>}
+          />
+          <Route
+            path="/revolution"
+            element={<div style={{ height: "100vh" }}>Revolution</div>}
+          />
+          <Route
+            path="/about"
+            element={<div style={{ height: "100vh" }}>About Us</div>}
+          />
+          <Route
+            path="/contact"
+            element={<div style={{ height: "100vh" }}>Contact Us</div>}
+          />
+          <Route
+            path="/estimate"
+            element={<div style={{ height: "100vh" }}>Estimate</div>}
+          />
         </Routes>
       </Router>
+      <Footer />
     </ThemeProvider>
   );
 }

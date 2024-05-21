@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import ElevateOnScroll from "./parts/ElevationScroll";
 import { default as CompanyLogo } from "../../assets/logo.svg";
 import { ChangeEvent, useEffect, useState } from "react";
-import updateSelectedHeaderItems from "./utilis/updateSelectedHeaderItems";
+import updateSelectedNavigationItems from "./utilis/updateSelectedNavigationItems";
 import PageTabs from "./parts/PageTabs";
 import PagesMenu from "./parts/PageMenu";
 
@@ -125,7 +125,7 @@ const Header = () => {
 
   useEffect(() => {
     const pathName = window.location.pathname;
-    updateSelectedHeaderItems(pathName, value, setValue, setMenuItemIndex);
+    updateSelectedNavigationItems(pathName, value, setValue, setMenuItemIndex);
   }, [value]);
 
   return (

@@ -1,7 +1,4 @@
-import { tab } from "@testing-library/user-event/dist/tab";
-import path from "path";
-
-const updateSelectedHeaderItems = (
+const updateSelectedNavigationItems = (
   pathname: string,
   value: number,
   setValue: React.Dispatch<React.SetStateAction<number>>,
@@ -49,4 +46,4 @@ const updateSelectedHeaderItems = (
   });
 };
 
-export default updateSelectedHeaderItems;
+export default updateSelectedNavigationItems;
