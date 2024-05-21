@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import customTheme from "./theme/customTheme";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
+import { Typography } from "@material-ui/core";
 
 function App() {
   return (
@@ -14,39 +15,75 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<div style={{ height: "100vh" }}>Home</div>}
+            element={
+              <div style={{ height: "90vh" }}>
+                <Typography variant="h1">Home</Typography>
+              </div>
+            }
           />
           <Route
             path="/services"
-            element={<div style={{ height: "100vh" }}>Services</div>}
+            element={
+              <div style={{ height: "90vh" }}>
+                <Typography variant="h1">Services</Typography>
+              </div>
+            }
           />
           <Route
             path="/customsoftware"
-            element={<div style={{ height: "100vh" }}>Custom Software</div>}
+            element={
+              <div style={{ height: "90vh" }}>
+                <Typography variant="h1">Custom Software</Typography>
+              </div>
+            }
           />
           <Route
             path="/mobileapps"
-            element={<div style={{ height: "100vh" }}>Mobile Apps</div>}
+            element={
+              <div style={{ height: "90vh" }}>
+                <Typography variant="h1">Mobile Apps</Typography>
+              </div>
+            }
           />
           <Route
             path="/websites"
-            element={<div style={{ height: "100vh" }}>Web Sites</div>}
+            element={
+              <div style={{ height: "90vh" }}>
+                <Typography variant="h1">Web Sites</Typography>
+              </div>
+            }
           />
           <Route
             path="/revolution"
-            element={<div style={{ height: "100vh" }}>Revolution</div>}
+            element={
+              <div style={{ height: "90vh" }}>
+                <Typography variant="h1">Revolution</Typography>
+              </div>
+            }
           />
           <Route
             path="/about"
-            element={<div style={{ height: "100vh" }}>About Us</div>}
+            element={
+              <div style={{ height: "90vh" }}>
+                <Typography variant="h1">About Us</Typography>
+              </div>
+            }
           />
           <Route
             path="/contact"
-            element={<div style={{ height: "100vh" }}>Contact Us</div>}
+            element={
+              <div style={{ height: "90vh" }}>
+                <Typography variant="h1">Contact Us</Typography>
+              </div>
+            }
           />
           <Route
             path="/estimate"
-            element={<div style={{ height: "100vh" }}>Estimate</div>}
+            element={
+              <div style={{ height: "90vh" }}>
+                <Typography variant="h1">Estimate</Typography>
+              </div>
+            }
           />
         </Routes>
       </Router>
