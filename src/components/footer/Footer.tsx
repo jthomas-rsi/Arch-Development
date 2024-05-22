@@ -1,7 +1,16 @@
-import { Grid, makeStyles, Theme } from "@material-ui/core";
+import {
+  Grid,
+  makeStyles,
+  Theme,
+  useMediaQuery,
+  useTheme,
+} from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 import footerAdornment from "../../assets/FooterAdornment.svg";
+import facebook from "../../assets/facebook.svg";
+import instagram from "../../assets/instagram.svg";
+import twitter from "../../assets/twitter.svg";
 import { SetStateAction } from "react";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -53,19 +62,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface FooterProps {
-  tabValue: number;
-  menuItemIndex: number;
   setTabValue: React.Dispatch<React.SetStateAction<number>>;
   setMenuItemIndex: React.Dispatch<SetStateAction<number>>;
 }
 
-const Footer = ({
-  tabValue,
-  menuItemIndex,
-  setTabValue,
-  setMenuItemIndex,
-}: FooterProps) => {
+const Footer = ({ setTabValue, setMenuItemIndex }: FooterProps) => {
   const styles = useStyles();
+  const { breakpoints } = useTheme();
+  const isSmallScreen = useMediaQuery(breakpoints.down("md"));
 
   const handleFooterClick = (tabValue: number, menuItemValue?: number) => {
     setTabValue(tabValue);
@@ -73,150 +77,190 @@ const Footer = ({
   };
   return (
     <footer className={styles.footer}>
-      <Grid container justifyContent="center" className={styles.mainContainer}>
-        <Grid item className={styles.gridItem}>
-          <Grid container direction="column" spacing={2}>
-            <Grid
-              item
-              className={styles.link}
-              component={Link}
-              to="/"
-              onClick={() => handleFooterClick(0)}
-            >
-              Home
+      {!isSmallScreen && (
+        <Grid
+          container
+          justifyContent="center"
+          className={styles.mainContainer}
+        >
+          <Grid item className={styles.gridItem}>
+            <Grid container direction="column" spacing={2}>
+              <Grid
+                item
+                className={styles.link}
+                component={Link}
+                to="/"
+                onClick={() => handleFooterClick(0)}
+              >
+                Home
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item className={styles.gridItem}>
+            <Grid container direction="column" spacing={2}>
+              <Grid
+                item
+                className={styles.link}
+                component={Link}
+                to="/services"
+                onClick={() => handleFooterClick(1, 0)}
+              >
+                Services
+              </Grid>
+              <Grid
+                item
+                className={styles.link}
+                component={Link}
+                to="/customsoftware"
+                onClick={() => handleFooterClick(1, 1)}
+              >
+                Custom Software Development
+              </Grid>
+              <Grid
+                item
+                className={styles.link}
+                component={Link}
+                to="/mobileapps"
+                onClick={() => handleFooterClick(1, 2)}
+              >
+                Mobile App Development
+              </Grid>
+              <Grid
+                item
+                className={styles.link}
+                component={Link}
+                to="/websites"
+                onClick={() => handleFooterClick(1, 3)}
+              >
+                Website Development
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item className={styles.gridItem}>
+            <Grid container direction="column" spacing={2}>
+              <Grid
+                item
+                className={styles.link}
+                component={Link}
+                to="/revolution"
+                onClick={() => handleFooterClick(2)}
+              >
+                The Revolution
+              </Grid>
+              <Grid
+                item
+                className={styles.link}
+                component={Link}
+                to="/revolution"
+                onClick={() => handleFooterClick(2)}
+              >
+                Vision
+              </Grid>
+              <Grid
+                item
+                className={styles.link}
+                component={Link}
+                to="/revolution"
+                onClick={() => handleFooterClick(2)}
+              >
+                Technology
+              </Grid>
+              <Grid
+                item
+                className={styles.link}
+                component={Link}
+                to="/revolution "
+                onClick={() => handleFooterClick(2)}
+              >
+                Process
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item className={styles.gridItem}>
+            <Grid container direction="column" spacing={2}>
+              <Grid
+                item
+                className={styles.link}
+                component={Link}
+                to="/about"
+                onClick={() => handleFooterClick(3)}
+              >
+                About Us
+              </Grid>
+              <Grid
+                item
+                className={styles.link}
+                component={Link}
+                to="/about"
+                onClick={() => handleFooterClick(3)}
+              >
+                History
+              </Grid>
+              <Grid
+                item
+                className={styles.link}
+                component={Link}
+                to="/about"
+                onClick={() => handleFooterClick(3)}
+              >
+                Team
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item className={styles.gridItem}>
+            <Grid container direction="column" spacing={2}>
+              <Grid
+                item
+                className={styles.link}
+                component={Link}
+                to="/contact"
+                onClick={() => handleFooterClick(4)}
+              >
+                Contact Us
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-        <Grid item className={styles.gridItem}>
-          <Grid container direction="column" spacing={2}>
-            <Grid
-              item
-              className={styles.link}
-              component={Link}
-              to="/services"
-              onClick={() => handleFooterClick(1, 0)}
-            >
-              Services
-            </Grid>
-            <Grid
-              item
-              className={styles.link}
-              component={Link}
-              to="/customsoftware"
-              onClick={() => handleFooterClick(1, 1)}
-            >
-              Custom Software Development
-            </Grid>
-            <Grid
-              item
-              className={styles.link}
-              component={Link}
-              to="/mobileapps"
-              onClick={() => handleFooterClick(1, 2)}
-            >
-              Mobile App Development
-            </Grid>
-            <Grid
-              item
-              className={styles.link}
-              component={Link}
-              to="/websites"
-              onClick={() => handleFooterClick(1, 3)}
-            >
-              Website Development
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item className={styles.gridItem}>
-          <Grid container direction="column" spacing={2}>
-            <Grid
-              item
-              className={styles.link}
-              component={Link}
-              to="/revolution"
-              onClick={() => handleFooterClick(2)}
-            >
-              The Revolution
-            </Grid>
-            <Grid
-              item
-              className={styles.link}
-              component={Link}
-              to="/revolution"
-              onClick={() => handleFooterClick(2)}
-            >
-              Vision
-            </Grid>
-            <Grid
-              item
-              className={styles.link}
-              component={Link}
-              to="/revolution"
-              onClick={() => handleFooterClick(2)}
-            >
-              Technology
-            </Grid>
-            <Grid
-              item
-              className={styles.link}
-              component={Link}
-              to="/revolution "
-              onClick={() => handleFooterClick(2)}
-            >
-              Process
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item className={styles.gridItem}>
-          <Grid container direction="column" spacing={2}>
-            <Grid
-              item
-              className={styles.link}
-              component={Link}
-              to="/about"
-              onClick={() => handleFooterClick(3)}
-            >
-              About Us
-            </Grid>
-            <Grid
-              item
-              className={styles.link}
-              component={Link}
-              to="/about"
-              onClick={() => handleFooterClick(3)}
-            >
-              History
-            </Grid>
-            <Grid
-              item
-              className={styles.link}
-              component={Link}
-              to="/about"
-              onClick={() => handleFooterClick(3)}
-            >
-              Team
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item className={styles.gridItem}>
-          <Grid container direction="column" spacing={2}>
-            <Grid
-              item
-              className={styles.link}
-              component={Link}
-              to="/contact"
-              onClick={() => handleFooterClick(4)}
-            >
-              Contact Us
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
+      )}
       <img
         src={footerAdornment}
         alt="black decorative slash"
         className={styles.adornment}
       />
+      <Grid
+        container
+        justifyContent="flex-end"
+        spacing={2}
+        className={styles.socialContainer}
+      >
+        <Grid
+          item
+          component={"a"}
+          href="http://www.facebook.com"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img src={facebook} alt="facebook logo" className={styles.icon} />
+        </Grid>
+        <Grid
+          item
+          component={"a"}
+          href="http://www.twitter.com"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img src={twitter} alt="twitter logo" className={styles.icon} />
+        </Grid>
+        <Grid
+          item
+          component={"a"}
+          href="http://www.instagram.com"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img src={instagram} alt="instagram logo" className={styles.icon} />
+        </Grid>
+      </Grid>
     </footer>
   );
 };

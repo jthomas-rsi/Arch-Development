@@ -91,9 +91,7 @@ function App() {
             }
           />
         </Routes>
-        <Footer
-          {...{ tabValue, menuItemIndex, setTabValue, setMenuItemIndex }}
-        />
+        <Footer {...{ setTabValue, setMenuItemIndex }} />
       </Router>
     </ThemeProvider>
   );
