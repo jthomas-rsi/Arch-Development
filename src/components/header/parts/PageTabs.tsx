@@ -65,8 +65,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface PageTabsProps {
   anchorEl: HTMLElement;
   openServicesMenu: boolean;
-  value: number;
-  setValue: Dispatch<SetStateAction<number>>;
+  tabValue: number;
+  setTabValue: Dispatch<SetStateAction<number>>;
   handleChange: (event: ChangeEvent<{}>, newValue: number) => void;
   handleOpen: (event: MouseEvent<HTMLAnchorElement>) => void;
   handleClose: () => void;
@@ -78,8 +78,8 @@ const PageTabs = ({
   anchorEl,
   menuItemIndex,
   openServicesMenu,
-  value,
-  setValue,
+  tabValue,
+  setTabValue,
   handleChange,
   handleClose,
   handleOpen,
@@ -106,7 +106,7 @@ const PageTabs = ({
 
   return (
     <Tabs
-      value={value}
+      value={tabValue}
       onChange={handleChange}
       aria-label="page tabs"
       indicatorColor="primary" // set to primary and blends into header background color
@@ -167,10 +167,10 @@ const PageTabs = ({
             key={`${option}${index}`}
             onClick={() => {
               handleClose();
-              setValue(1);
+              setTabValue(1);
               handleMenuItemClick(index);
             }}
-            selected={index === menuItemIndex && value === 1}
+            selected={index === menuItemIndex && tabValue === 1}
             to={option.link}
             component={Link}
             classes={{ root: styles.menuItem }}

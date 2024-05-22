@@ -64,21 +64,21 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface PagesMenuProps {
   openDrawer: boolean;
-  value: number;
-  setValue: Dispatch<SetStateAction<number>>;
+  tabValue: number;
+  setTabValue: Dispatch<SetStateAction<number>>;
   setOpenDrawer: Dispatch<SetStateAction<boolean>>;
 }
 
 const PagesMenu = ({
   openDrawer,
-  value,
-  setValue,
+  tabValue,
+  setTabValue,
   setOpenDrawer,
 }: PagesMenuProps) => {
   const styles = useStyles();
 
   const handleMenuItemClick = (i: number) => {
-    setValue(i);
+    setTabValue(i);
     setOpenDrawer(false);
   };
 
@@ -123,7 +123,7 @@ const PagesMenu = ({
                 component={Link}
                 to={item.link}
                 onClick={() => handleMenuItemClick(i)}
-                selected={value === i}
+                selected={tabValue === i}
                 key={i}
                 className={
                   item.name === "Free Estimate" ? styles.menuItemEstimate : ""
@@ -133,7 +133,7 @@ const PagesMenu = ({
                   disableTypography
                   primary={item.name}
                   className={
-                    value === i
+                    tabValue === i
                       ? `${styles.menuItem} ${styles.menuItemSelected}`
                       : styles.menuItem
                   } // adds a different style to the selected menu item
