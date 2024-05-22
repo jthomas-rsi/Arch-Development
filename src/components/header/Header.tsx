@@ -89,20 +89,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = () => {
+interface HeaderProps {
+  tabValue: number;
+  menuItemIndex: number;
+  setTabValue: React.Dispatch<React.SetStateAction<number>>;
+  setMenuItemIndex: React.Dispatch<SetStateAction<number>>;
+}
+
+const Header = ({
+  tabValue,
+  menuItemIndex,
+  setTabValue,
+  setMenuItemIndex,
+}: HeaderProps) => {
   const styles = useStyles();
   const { breakpoints } = useTheme();
   const isSmallScreen = useMediaQuery(breakpoints.down("md"));
-
   const [openDrawer, setOpenDrawer] = useState(false); // sets the open state of the drawer
-  const [value, setValue] = useState(0); // sets the active tab value
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // sets the anchor element for the menu
   const [openServicesMenu, setOpenServicesMenu] = useState(false);
-  const [menuItemIndex, setMenuItemIndex] = useState(0);
+  // const [tabValue, setTabValue] = useState(0); // sets the active tab value
+  // const [menuItemIndex, setMenuItemIndex] = useState(0);
 
   // changes the active tab value based on the current page
   const handleChange = (event: ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
+    setTabValue(newValue);
   };
 
   // opens the menu when the button is clicked
@@ -125,8 +136,13 @@ const Header = () => {
 
   useEffect(() => {
     const pathName = window.location.pathname;
-    updateSelectedNavigationItems(pathName, value, setValue, setMenuItemIndex);
-  }, [value]);
+    updateSelectedNavigationItems(
+      pathName,
+      tabValue,
+      setTabValue,
+      setMenuItemIndex,
+    );
+  }, [setMenuItemIndex, setTabValue, tabValue]);
 
   return (
     <>
@@ -137,7 +153,7 @@ const Header = () => {
               className={styles.logoContainer}
               component={Link}
               to="/"
-              onClick={() => setValue(0)} // resets active tab to home page
+              onClick={() => setTabValue(0)} // resets active tab to home page
               disableRipple
             >
               <img
@@ -152,8 +168,8 @@ const Header = () => {
                   anchorEl: anchorEl!,
                   menuItemIndex,
                   openServicesMenu,
-                  value,
-                  setValue,
+                  tabValue,
+                  setTabValue,
                   handleChange,
                   handleClose,
                   handleOpen,
@@ -166,8 +182,8 @@ const Header = () => {
                 <PagesMenu
                   {...{
                     openDrawer,
-                    value,
-                    setValue,
+                    tabValue,
+                    setTabValue,
                     setOpenDrawer,
                   }}
                 />

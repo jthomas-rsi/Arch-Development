@@ -1,6 +1,6 @@
-import React from "react";
+import { useState } from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import customTheme from "./theme/customTheme";
 import Header from "./components/header/Header";
@@ -8,10 +8,15 @@ import Footer from "./components/footer/Footer";
 import { Typography } from "@material-ui/core";
 
 function App() {
+  const [tabValue, setTabValue] = useState(0); // sets the active tab value
+  const [menuItemIndex, setMenuItemIndex] = useState(0);
+
   return (
     <ThemeProvider theme={customTheme}>
       <Router>
-        <Header />
+        <Header
+          {...{ tabValue, menuItemIndex, setTabValue, setMenuItemIndex }}
+        />
         <Routes>
           <Route
             path="/"
@@ -86,8 +91,10 @@ function App() {
             }
           />
         </Routes>
+        <Footer
+          {...{ tabValue, menuItemIndex, setTabValue, setMenuItemIndex }}
+        />
       </Router>
-      <Footer />
     </ThemeProvider>
   );
 }
