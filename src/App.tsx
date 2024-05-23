@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { ThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider, Typography } from "@material-ui/core";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import customTheme from "./theme/customTheme";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
-import { Typography } from "@material-ui/core";
+import LandingPage from "./components/landingPage/LandinPage";
 
 function App() {
   const [tabValue, setTabValue] = useState(0); // sets the active tab value
@@ -18,14 +18,7 @@ function App() {
           {...{ tabValue, menuItemIndex, setTabValue, setMenuItemIndex }}
         />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <div style={{ height: "90vh" }}>
-                <Typography variant="h1">Home</Typography>
-              </div>
-            }
-          />
+          <Route path="/" element={<LandingPage />} />
           <Route
             path="/services"
             element={
