@@ -33,6 +33,9 @@ What situations did you run into and how did you solve them?
 - Detecting user device type using user agent information
   -- installed `react-useragent` in PagesMenu to detect IOS devices
 
+- Installation of React-Lottie to create picture animations
+  -- is there another way to handle animations in MUI/React apps
+
 ### Information Resources
 
 What good information did you learn and where did you find it?
