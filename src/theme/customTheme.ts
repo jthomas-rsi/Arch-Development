@@ -41,7 +41,13 @@ const customTheme = createTheme({
         }
     },
     typography: {
-
+        h2: {
+            fontFamily: "Raleway",
+            fontWeight: 700,
+            fontSize: "2.5rem",
+            color: archBlue,
+            lineHeight: 1.5,
+        },
     },
 });
 

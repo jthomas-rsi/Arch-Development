@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: "none",
     height: "45px",
     color: theme.palette.common.white,
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.light,
+    },
   },
   menu: {
     backgroundColor: theme.palette.common.blue,
