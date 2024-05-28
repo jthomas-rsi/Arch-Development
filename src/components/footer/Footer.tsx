@@ -123,7 +123,7 @@ const Footer = ({ setTabValue, setMenuItemIndex }: FooterProps) => {
                 to="/mobileapps"
                 onClick={() => handleFooterClick(1, 2)}
               >
-                Mobile App Development
+                iOS/Android App Development
               </Grid>
               <Grid
                 item

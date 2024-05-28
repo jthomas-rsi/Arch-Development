@@ -5,10 +5,12 @@ import {
   makeStyles,
   Typography,
   useTheme,
+  useMediaQuery,
 } from "@material-ui/core";
 
-import animationData from "../../animations/landinganimation/data";
 import ButtonArrow from "../buttonArrow/ButtonArrow";
+import animationData from "../../animations/landinganimation/data";
+import customSoftwareIcon from "../../assets/Custom Software Icon.svg";
 
 // default options for the Lottie animation
 const defaultOptions = {
@@ -61,6 +63,27 @@ const useStyles = makeStyles((theme) => ({
     height: 45,
     width: 145,
   },
+  learnButton: {
+    borderColor: theme.palette.common.blue,
+    color: theme.palette.common.blue,
+    borderWidth: 2,
+    textTransform: "none",
+    borderRadius: 50,
+    fontFamily: "Roboto",
+    fontWeight: "bold",
+    fontSize: "0.7rem",
+    height: 35,
+    padding: 5,
+    width: 145,
+    marginTop: "1em",
+    "&:hover": {
+      backgroundColor: theme.palette.common.blue,
+      color: theme.palette.common.white,
+    },
+    [theme.breakpoints.down("sm")]: {
+      marginBottom: "2em",
+    },
+  },
   pageContainer: {
     marginTop: "5em",
     [theme.breakpoints.down("md")]: {
@@ -77,12 +100,35 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 0,
     },
   },
+  specialText: {
+    fontFamily: "Pacifico",
+    color: theme.palette.common.orange,
+  },
+  subtitle: {
+    marginBottom: "1em",
+  },
+  icon: {
+    marginLeft: "2em",
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: 0,
+    },
+  },
+  servicesContainer: {
+    marginTop: "12em",
+    [theme.breakpoints.down("sm")]: {
+      padding: 25,
+    },
+  },
 }));
 
 const LandingPage = () => {
   const styles = useStyles();
 
   const theme = useTheme();
+
+  const { breakpoints } = useTheme();
+
+  const isSmallScreen = useMediaQuery(breakpoints.down("sm"));
 
   return (
     <Grid
@@ -93,6 +139,7 @@ const LandingPage = () => {
       className={styles.pageContainer}
     >
       <Grid item>
+        {/* ----- HERO BLOCK ----- */}
         <Grid
           container
           justifyContent="flex-end"
@@ -129,6 +176,47 @@ const LandingPage = () => {
           </Grid>
           <Grid sm item className={styles.animation}>
             <Lottie options={defaultOptions} height={"100"} width={"100"} />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        {/* ----- CUSTOM SOFTWARE BLOCK ----- */}
+        <Grid
+          container
+          direction="row"
+          className={styles.servicesContainer}
+          justifyContent={isSmallScreen ? "center" : undefined}
+        >
+          <Grid
+            item
+            style={{
+              marginLeft: isSmallScreen ? 0 : "5em",
+              textAlign: isSmallScreen ? "center" : undefined,
+            }}
+          >
+            <Typography variant="h4">Custom Software Development</Typography>
+            <Typography variant="subtitle1" className={styles.subtitle}>
+              Save Energy. Save Time. Save Money.
+            </Typography>
+            <Typography variant="subtitle1">
+              Complete digital solutions, from investigation to{" "}
+              <span className={styles.specialText}>celebration.</span>
+            </Typography>
+            <Button variant="outlined" className={styles.learnButton}>
+              <span style={{ marginRight: 10 }}>Learn More</span>
+              <ButtonArrow
+                width="15px"
+                height="15px"
+                fill={`${theme.palette.common.blue}`}
+              />
+            </Button>
+          </Grid>
+          <Grid item>
+            <img
+              src={customSoftwareIcon}
+              alt="custom software icon"
+              className={styles.icon}
+            />
           </Grid>
         </Grid>
       </Grid>

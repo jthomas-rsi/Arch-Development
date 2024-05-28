@@ -4,6 +4,7 @@ import {createTheme } from '@material-ui/core/styles';
 //custom color codes
 const archBlue = "#0B72B9";
 const archOrange = "#FFBA60";
+const archGrey = "#868686";
 
 // this declaration is needed for the TS implementation of a MUI custom palette colors
 declare module '@material-ui/core/styles/createPalette' {
@@ -47,6 +48,17 @@ const customTheme = createTheme({
             fontSize: "2.5rem",
             color: archBlue,
             lineHeight: 1.5,
+        },
+        h4: {
+            fontFamily: "Raleway",
+            fontWeight: 700,
+            fontSize: "1.75rem",
+            color: archBlue,
+        },
+        subtitle1: {
+            fontSize: "1.25rem",
+            fontWeight: 300,
+            color: archGrey,
         },
     },
 });
