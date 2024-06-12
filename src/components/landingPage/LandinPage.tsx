@@ -86,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
   },
   pageContainer: {
     marginTop: "5em",
+    // flexWrap: "nowrap",
     [theme.breakpoints.down("md")]: {
       marginTop: "3em",
     },
@@ -135,7 +136,7 @@ const LandingPage = () => {
       container
       id="landingPage-container"
       direction="column"
-      style={{ height: "90vh" }}
+      style={{ height: "100vh" }}
       className={styles.pageContainer}
     >
       <Grid item>
