@@ -12,6 +12,7 @@ import ButtonArrow from "../buttonArrow/ButtonArrow";
 import animationData from "../../animations/landinganimation/data";
 import customSoftwareIcon from "../../assets/Custom Software Icon.svg";
 import mobileAppsIcon from "../../assets/mobileIcon.svg";
+import websitesIcon from "../../assets/websiteIcon.svg";
 
 // default options for the Lottie animation
 const defaultOptions = {
@@ -234,7 +235,6 @@ const LandingPage = () => {
           <Grid
             item
             style={{
-              marginLeft: isSmallScreen ? 0 : "5em",
               textAlign: isSmallScreen ? "center" : undefined,
             }}
           >
@@ -255,10 +255,50 @@ const LandingPage = () => {
               />
             </Button>
           </Grid>
-          <Grid item>
+          <Grid item style={{ marginRight: isSmallScreen ? 0 : "5em" }}>
             <img
               src={mobileAppsIcon}
-              alt="custom software icon"
+              alt="mobile phone icon"
+              className={styles.icon}
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        {/* ----- WEBSITES BLOCK ----- */}
+        <Grid
+          container
+          direction="row"
+          className={styles.servicesContainer}
+          justifyContent={isSmallScreen ? "center" : undefined}
+        >
+          <Grid
+            item
+            style={{
+              marginLeft: isSmallScreen ? 0 : "5em",
+              textAlign: isSmallScreen ? "center" : undefined,
+            }}
+          >
+            <Typography variant="h4">Website Development</Typography>
+            <Typography variant="subtitle1" className={styles.subtitle}>
+              Reach More. Discover More. Sell More.
+            </Typography>
+            <Typography variant="subtitle1">
+              Optimized for Search Engines, built for speed.
+            </Typography>
+            <Button variant="outlined" className={styles.learnButton}>
+              <span style={{ marginLeft: 10 }}>Learn More</span>
+              <ButtonArrow
+                width="15px"
+                height="15px"
+                fill={`${theme.palette.common.blue}`}
+              />
+            </Button>
+          </Grid>
+          <Grid item>
+            <img
+              src={websitesIcon}
+              alt="websites icon"
               className={styles.icon}
             />
           </Grid>
