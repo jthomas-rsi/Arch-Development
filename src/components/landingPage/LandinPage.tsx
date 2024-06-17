@@ -11,6 +11,7 @@ import {
 import ButtonArrow from "../buttonArrow/ButtonArrow";
 import animationData from "../../animations/landinganimation/data";
 import customSoftwareIcon from "../../assets/Custom Software Icon.svg";
+import mobileAppsIcon from "../../assets/mobileIcon.svg";
 
 // default options for the Lottie animation
 const defaultOptions = {
@@ -86,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
   },
   pageContainer: {
     marginTop: "5em",
-    // flexWrap: "nowrap",
+    flexWrap: "nowrap",
     [theme.breakpoints.down("md")]: {
       marginTop: "3em",
     },
@@ -116,8 +117,9 @@ const useStyles = makeStyles((theme) => ({
   },
   servicesContainer: {
     marginTop: "12em",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
       padding: 25,
+      marginTop: "2em",
     },
   },
 }));
@@ -204,7 +206,7 @@ const LandingPage = () => {
               <span className={styles.specialText}>celebration.</span>
             </Typography>
             <Button variant="outlined" className={styles.learnButton}>
-              <span style={{ marginRight: 10 }}>Learn More</span>
+              <span style={{ marginLeft: 10 }}>Learn More</span>
               <ButtonArrow
                 width="15px"
                 height="15px"
@@ -215,6 +217,47 @@ const LandingPage = () => {
           <Grid item>
             <img
               src={customSoftwareIcon}
+              alt="custom software icon"
+              className={styles.icon}
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        {/* ----- iOS/Android BLOCK ----- */}
+        <Grid
+          container
+          direction="row"
+          className={styles.servicesContainer}
+          justifyContent={isSmallScreen ? "center" : "flex-end"}
+        >
+          <Grid
+            item
+            style={{
+              marginLeft: isSmallScreen ? 0 : "5em",
+              textAlign: isSmallScreen ? "center" : undefined,
+            }}
+          >
+            <Typography variant="h4">iOS/Android App Development</Typography>
+            <Typography variant="subtitle1" className={styles.subtitle}>
+              Extend Functionality. Extend Access. Increase Engagement.
+            </Typography>
+            <Typography variant="subtitle1">
+              Integrate your web experience or create a standalone app
+              {isSmallScreen ? null : <br />} with either mobile platform.
+            </Typography>
+            <Button variant="outlined" className={styles.learnButton}>
+              <span style={{ marginRight: 10 }}>Learn More</span>
+              <ButtonArrow
+                width="15px"
+                height="15px"
+                fill={`${theme.palette.common.blue}`}
+              />
+            </Button>
+          </Grid>
+          <Grid item>
+            <img
+              src={mobileAppsIcon}
               alt="custom software icon"
               className={styles.icon}
             />
